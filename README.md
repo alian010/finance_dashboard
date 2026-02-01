@@ -153,7 +153,7 @@ python manage.py runserver
 
 ---
 
-## API Documentation (Swagger/OpenAPI)
+## API Documentation (postman)
 
 <img width="1267" height="961" alt="Screenshot 2026-02-01 164641" src="https://github.com/user-attachments/assets/7d2cb531-aa39-493a-9210-0e1847fffd17" />
 
