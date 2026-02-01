@@ -60,9 +60,6 @@ A private, user-isolated personal finance ledger where users can securely log da
 
 ## Project Structure
 
-```
-
-.
 ├─ accounts/
 │  ├─ admin.py
 │  ├─ models.py
