@@ -1,6 +1,6 @@
 ```md
 # Personal Finance Dashboard — Secure Ledger & Real-Time Insights  
-**Stack:** Django REST Framework (DRF) + JWT + Swagger/OpenAPI + Tailwind UI (Templates) + Chart.js
+**Stack:** Django REST Framework (DRF) + JWT + Postman + Tailwind UI (Templates) + Chart.js
 
 A private, user-isolated personal finance ledger where users can securely log daily expenditures and view an automatically updating dashboard (monthly total, category breakdown, and month-over-month spending trend).
 
@@ -125,6 +125,7 @@ pip install -r requirements.txt
 ### 3) Apply Migrations
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
@@ -154,10 +155,7 @@ python manage.py runserver
 
 ## API Documentation (Swagger/OpenAPI)
 
-* Swagger UI: `http://127.0.0.1:8000/api/docs/`
-* OpenAPI Schema: `http://127.0.0.1:8000/api/schema/`
-
-Swagger UI acts as the **definitive contract** between backend and frontend.
+<img width="1267" height="961" alt="Screenshot 2026-02-01 164641" src="https://github.com/user-attachments/assets/7d2cb531-aa39-493a-9210-0e1847fffd17" />
 
 ---
 
@@ -422,6 +420,6 @@ This repository is designed to meet the provided project specification with a st
 
 * Security (JWT + owner-only isolation)
 * Server-side aggregation
-* Clean API documentation (Swagger)
+* Clean API documentation (postman)
 * Modular code quality and maintainability
 
