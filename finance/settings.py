@@ -1,24 +1,34 @@
-
 import os
 from pathlib import Path
 from datetime import timedelta
+
+from decouple import config, Csv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
+SECRET_KEY = config(
+    "DJANGO_SECRET_KEY",
+    default="django-insecure-change-me-in-env",
+)
 
-SECRET_KEY = "django-insecure-2^%j94&ee3ivwb@oyb6v9(eiq3p!n@*ksu!ujs@_sh7nd%9@1%"
+DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 
-DEBUG = True
+ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS", default="127.0.0.1,localhost", cast=Csv())
 
-ALLOWED_HOSTS = []
 
+# =========================
+# Custom User Model
+# =========================
 AUTH_USER_MODEL = "accounts.User"
 
 
+# =========================
+# Applications
+# =========================
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -26,23 +36,22 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+
     # third-party apps
     "rest_framework",
     "corsheaders",
     "drf_spectacular",
-    
-    
-    
-    #local apps
-    'accounts',
-    'transactions',
-    'reports',
-    
-    
-    
+
+    # local apps
+    "accounts",
+    "transactions",
+    "reports",
 ]
 
+
+# =========================
+# Middleware
+# =========================
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -55,13 +64,20 @@ MIDDLEWARE = [
 ]
 
 
-
-
-
 ROOT_URLCONF = "finance.urls"
-CORS_ALLOW_ALL_ORIGINS = True
+WSGI_APPLICATION = "finance.wsgi.application"
 
 
+# =========================
+# CORS (dev friendly)
+# =========================
+
+CORS_ALLOW_ALL_ORIGINS = config("CORS_ALLOW_ALL_ORIGINS", default=True, cast=bool)
+
+
+# =========================
+# Templates
+# =========================
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -78,61 +94,57 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "finance.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# =========================
+# Database (MySQL via .env)
+# =========================
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": config("DB_ENGINE", default="django.db.backends.mysql"),
+        "NAME": config("DB_NAME", default="finance_db"),
+        "USER": config("DB_USER", default="finance_user"),
+        "PASSWORD": config("DB_PASSWORD", default=""),
+        "HOST": config("DB_HOST", default="127.0.0.1"),
+        "PORT": config("DB_PORT", default="3306"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
 }
 
 
+# =========================
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
+# =========================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 
+# =========================
+# i18n / tz
+# =========================
 LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
+TIME_ZONE = "asia/dhaka"
 USE_I18N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+
+# =========================
+# Static files
+# =========================
 STATIC_URL = "static/"
-
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
-
-
-
+# =========================
+# DRF + Swagger/OpenAPI
+# =========================
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -150,10 +162,17 @@ SPECTACULAR_SETTINGS = {
 }
 
 
+# =========================
+# JWT Settings
+# =========================
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),   
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),      
-    "ROTATE_REFRESH_TOKENS": False,                   
-    "BLACKLIST_AFTER_ROTATION": True,                 
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        minutes=config("JWT_ACCESS_MINUTES", default=60, cast=int)
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=config("JWT_REFRESH_DAYS", default=7, cast=int)
+    ),
+    "ROTATE_REFRESH_TOKENS": config("JWT_ROTATE_REFRESH", default=False, cast=bool),
+    "BLACKLIST_AFTER_ROTATION": config("JWT_BLACKLIST_AFTER_ROTATION", default=True, cast=bool),
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
