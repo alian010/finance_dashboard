@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Personal Finance{% endblock %}
+
+{% block head_extra %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+{% include "dashboard/_topbar.html" %}
+
+<main class="mx-auto max-w-6xl px-4 py-6">
+
+  <!-- Hero -->
+  <section class="rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/50 to-slate-950 p-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-semibold">Your spending at a glance</h1>
+        <p class="mt-2 text-slate-400 text-sm">
+          Add expenses, track categories, and watch your month-to-month trend update instantly.
+        </p>
+      </div>
+
+      <div class="flex gap-2">
+        <button id="btnRefresh"
+          class="rounded-xl bg-white text-slate-950 px-4 py-2 text-sm font-medium hover:opacity-90 transition">
+          Refresh
+        </button>
+        <button id="btnOpenAdd"
+          class="rounded-xl border border-slate-800 px-4 py-2 text-sm hover:bg-slate-900 transition">
+          + Add transaction
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {% include "dashboard/_kpis.html" %}
+
+  <section class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-4">
+    {% include "dashboard/_chart.html" %}
+    {% include "dashboard/_transactions_table.html" %}
+  </section>
+</main>
+
+{% include "dashboard/_modal_add.html" %}
+{% include "dashboard/_modal_edit.html" %}
+{% include "dashboard/_scripts.html" %}
+{% endblock %}

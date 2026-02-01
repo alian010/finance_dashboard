@@ -1,0 +1,48 @@
+<div class="lg:col-span-3 rounded-2xl border border-slate-800 bg-slate-900/30 p-5">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+      <div class="text-sm font-medium">Transactions</div>
+      <div class="text-xs text-slate-400">Paginated history</div>
+    </div>
+
+    <div class="flex gap-2">
+      <select id="pageSize"
+        class="rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 text-sm outline-none focus:border-slate-600">
+        <option value="20">20 / page</option>
+        <option value="30">30 / page</option>
+        <option value="50">50 / page</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mt-4 overflow-x-auto">
+    <table class="min-w-full text-sm">
+      <thead class="text-slate-400">
+        <tr class="border-b border-slate-800">
+          <th class="py-3 text-left font-medium">Date</th>
+          <th class="py-3 text-left font-medium">Category</th>
+          <th class="py-3 text-left font-medium">Note</th>
+          <th class="py-3 text-right font-medium">Amount</th>
+          <th class="py-3 text-right font-medium">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="txBody" class="text-slate-200"></tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 flex items-center justify-between">
+    <button id="btnPrev" class="rounded-xl border border-slate-800 px-3 py-2 text-sm hover:bg-slate-900 transition">
+      ← Prev
+    </button>
+
+    <div class="text-xs text-slate-400">
+      Page <span id="pageNo">1</span>
+      <span class="text-slate-600">•</span>
+      <span id="pageMeta">—</span>
+    </div>
+
+    <button id="btnNext" class="rounded-xl border border-slate-800 px-3 py-2 text-sm hover:bg-slate-900 transition">
+      Next →
+    </button>
+  </div>
+</div>
