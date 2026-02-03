@@ -37,17 +37,20 @@
 					<select id="editCategory"
 						class="mt-1 w-full rounded-xl bg-slate-950 border border-slate-800 px-3 py-3 text-sm outline-none focus:border-slate-600"
 						required>
-						<option value="FOOD">Food</option>
-						<option value="RENT">Rent</option>
-						<option value="TRANSPORT">Transport</option>
-						<option value="ENTERTAINMENT">Entertainment</option>
-						<option value="UTILITIES">Utilities</option>
-						<option value="HEALTH">Health</option>
-						<option value="SHOPPING">Shopping</option>
-						<option value="EDUCATION">Education</option>
-						<option value="OTHER">Other</option>
+						<!-- ✅ OPTIONS WILL COME FROM API -->
 					</select>
 				</div>
+
+				<div>
+					<label class="text-xs text-slate-400">Type</label>
+					<select id="editTxnType"
+						class="mt-1 w-full rounded-xl bg-slate-950 border border-slate-800 px-3 py-3 text-sm outline-none focus:border-slate-600"
+						required>
+						<option value="EXPENSE">Expense</option>
+						<option value="INCOME">Income</option>
+					</select>
+				</div>
+
 
 				<div>
 					<label class="text-xs text-slate-400">Note (optional)</label>

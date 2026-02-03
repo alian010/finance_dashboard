@@ -21,4 +21,7 @@ urlpatterns = [
 
     # Dashboard page
     path("dashboard/", TemplateView.as_view(template_name="dashboard/index.html"), name="dashboard"),
+    
+    path("api/", include("transactions.urls")),
+
 ]

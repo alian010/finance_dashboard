@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+env/
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+.DS_Store?
+
+# Build outputs
+dist/
+build/
+*.o
+*.out
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+.cache/
